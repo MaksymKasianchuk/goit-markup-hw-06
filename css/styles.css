@@ -6,7 +6,7 @@
   --hero-bg-color: #c4c4c4;
   --titles-color: #212121;
   --description-color: #757575;
-  --light-text-color: #fff;
+  --white-color: #fff;
   --dark-background-color: #2f303a;
   --logo-second-part-color: #000;
   --footer-link-color: rgba(255, 255, 255, 0.6);
@@ -33,6 +33,16 @@ img {
 }
 /*  ============ COMPONENTS  ============ */
 
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
 .logo {
   font-family: var(--secondary-font);
   font-style: normal;
@@ -132,7 +142,8 @@ img {
   left: 50%;
   width: 528px;
   height: 581px;
-  background-color: var(--light-text-color);
+  padding: 40px;
+  background-color: var(--white-color);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   transform: translate(-50%, -50%) scale(1);
@@ -145,7 +156,7 @@ img {
   right: 8px;
   width: 30px;
   height: 30px;
-  background: var(--light-text-color);
+  background: var(--white-color);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   cursor: pointer;
@@ -153,6 +164,7 @@ img {
 .close-btn-svg {
   width: 11px;
   height: 11px;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .close-btn:focus .close-btn-svg {
@@ -162,6 +174,119 @@ img {
 .close-btn:hover .close-btn-svg {
   fill: var(--accent-color);
 }
+
+/* ============ MODAL FORM  ============*/
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: var(--titles-color);
+  margin-bottom: 12px;
+}
+
+.modal-form-field-wrapper {
+  position: relative;
+  display: block;
+  margin-top: 4px;
+}
+.modal-form-inp-label {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.167;
+  letter-spacing: 0.01em;
+  color: var(--description-color);
+  margin-bottom: 10px;
+}
+.modal-form-input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  padding-left: 42px;
+  outline: none;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form-input:focus,
+.modal-form-message:focus {
+  border: 1px solid var(--accent-color);
+}
+
+.modal-form-user-svg {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translatey(-50%);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form-input:focus + .modal-form-user-svg {
+  fill: var(--accent-color);
+}
+
+.modal-form-message {
+  display: block;
+  width: 100%;
+  height: 120px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  resize: none;
+  padding: 12px 16px;
+  outline: none;
+  margin-top: 4px;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form-message::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.143;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+}
+
+.modal-check-policy-label {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.714;
+  letter-spacing: 0.03em;
+  color: var(--description-color);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.modal-check-policy-label::before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 15px;
+  margin-right: 8px;
+  background-image: url(../images/modal/flag-false.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-form-checkbox:checked + .modal-check-policy-label::before {
+  background-image: url(../images/modal/flag-true.svg);
+}
+.modal-form-policy-link {
+  color: var(--accent-color);
+}
+
+.modal-form-btn {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+/* ============ END MODAL FORM  ============*/
 
 /*  ============ END MODAL  ============ */
 
@@ -282,12 +407,14 @@ img {
   text-align: center;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--light-text-color);
+  color: var(--white-color);
   margin: 0 auto;
   margin-bottom: 30px;
 }
 
-.modal-btn {
+.modal-btn,
+.modal-form-btn,
+.subscribe-btn {
   display: block;
   margin: 0 auto;
   font-family: var(--main-font);
@@ -297,7 +424,7 @@ img {
   line-height: 1.875;
   text-align: center;
   letter-spacing: 0.06em;
-  color: var(--light-text-color);
+  color: var(--white-color);
   min-width: 200px;
   height: 50px;
   background-color: var(--accent-color);
@@ -308,6 +435,10 @@ img {
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.subscribe-btn:hover,
+.subscribe-btn:focus,
+.modal-form-btn:hover,
+.modal-form-btn:focus,
 .modal-btn:hover,
 .modal-btn:focus {
   background-color: var(--hero-btn-accent-color);
@@ -398,7 +529,7 @@ img {
   text-align: center;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--light-text-color);
+  color: var(--white-color);
 }
 /* ============ END WHAT WE DO  ============*/
 
@@ -456,7 +587,7 @@ img {
 }
 
 .team .social-list-link {
-  background-color: var(--light-text-color);
+  background-color: var(--white-color);
 }
 
 .team .social-list-svg {
@@ -469,11 +600,11 @@ img {
 }
 
 .social-list-link:hover .social-list-svg {
-  fill: var(--light-text-color);
+  fill: var(--white-color);
 }
 
 .social-list-link:focus .social-list-svg {
-  fill: var(--light-text-color);
+  fill: var(--white-color);
 }
 /* ============ END TEAM  ============*/
 
@@ -491,7 +622,7 @@ img {
   justify-content: center;
   width: 170px;
   height: 90px;
-  background-color: var(--light-text-color);
+  background-color: var(--white-color);
   border: 1px solid var(--unactive-interactive-element);
   border-radius: 4px;
   transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -535,7 +666,7 @@ img {
   margin-bottom: 20px;
 }
 .footer-content .logo .logo-second-part {
-  color: var(--light-text-color);
+  color: var(--white-color);
 }
 
 .footer-address-list {
@@ -552,7 +683,7 @@ img {
 }
 
 .footer-map-link {
-  color: var(--light-text-color);
+  color: var(--white-color);
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -563,11 +694,13 @@ img {
 
 .footer-join {
   padding-top: 12px;
+  margin-right: 93px;
 }
 
-.footer-join-header {
+.footer-join-header,
+.subscribe-title {
   font-weight: 700;
-  color: var(--light-text-color);
+  color: var(--white-color);
   font-size: 14px;
   line-height: 1.142;
   letter-spacing: 0.03em;
@@ -587,7 +720,7 @@ img {
 }
 
 .social-list-svg {
-  fill: var(--light-text-color);
+  fill: var(--white-color);
 }
 
 .social-list-link:hover,
@@ -597,13 +730,56 @@ img {
 }
 
 .social-list-link:hover .social-list-svg {
-  fill: var(--light-text-color);
+  fill: var(--white-color);
 }
 
 .social-list-link:focus .social-list-svg {
-  fill: var(--light-text-color);
+  fill: var(--white-color);
 }
 
+.subscribe {
+  padding-top: 12px;
+}
+
+.subscribe-input {
+  width: 358px;
+  height: 50px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  padding-left: 16px;
+  outline: none;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--white-color);
+  margin-right: 12px;
+}
+
+.subscribe-input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  color: var(--footer-link-color);
+}
+
+.subscribe-input:focus {
+  border: 1px solid var(--accent-color);
+}
+
+.subscribe-btn {
+  display: inline-block;
+}
+
+.subscribe-btn::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  background-image: url(../images/footer/send-footer.svg);
+  vertical-align: middle;
+}
 /* ============ END FOOTER  ============*/
 
 /* ====================== PORTFOLIO PAGE  ========================*/
@@ -613,9 +789,6 @@ img {
   padding-bottom: 94px;
 }
 
-.portfolio-title {
-  display: none;
-}
 /* ============ END PORTFOLIO SECTION  ============*/
 /* ============ FILTERS  ============*/
 .filters {
@@ -649,7 +822,7 @@ img {
 
 .filters-btn:hover,
 .filters-btn:focus {
-  color: var(--light-text-color);
+  color: var(--white-color);
   background-color: var(--accent-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 }
@@ -704,7 +877,7 @@ img {
   font-size: 18px;
   line-height: 1.556;
   letter-spacing: 0.03em;
-  color: var(--light-text-color);
+  color: var(--white-color);
   width: 100%;
   height: 100%;
   padding: 63px 24px;

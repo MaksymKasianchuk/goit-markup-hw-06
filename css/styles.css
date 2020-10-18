@@ -121,33 +121,42 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.2);
-  transition: all 500ms linear;
+  transition: all 250ms linear;
 }
 
 .backdrop.is-hidden {
-  transform: scale(1.2) rotate(180deg);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: scale(1.5) rotateX(180deg) perspective(400px);
 }
 
+.backdrop.is-hidden.modal-wrapper,
 .backdrop.is-hidden.modal {
-  transition: all 500ms linear;
+  transition: all 250ms linear;
+}
+
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 15px;
+  transition: all 250ms linear 250ms;
 }
 
 .modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
   width: 528px;
   height: 581px;
   padding: 40px;
   background-color: var(--white-color);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  transform: translate(-50%, -50%) scale(1);
-  transition: all 500ms linear 500ms;
+  transform: scale(1);
+  transition: all 250ms linear 250ms;
 }
 
 .close-btn {
@@ -558,12 +567,12 @@ img {
 }
 
 .team-list-content {
-  padding: 30px 40px;
+  padding: 30px 32px;
   text-align: center;
   border-bottom: var(--border-color);
   border-right: var(--border-color);
   border-left: var(--border-color);
-  background-color: var(--light-text-color);
+  background-color: var(--white-color);
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -583,7 +592,10 @@ img {
 
 .social-list {
   display: flex;
-  justify-content: space-between;
+}
+
+.social-list-item:not(:last-child) {
+  margin-right: 10px;
 }
 
 .team .social-list-link {
